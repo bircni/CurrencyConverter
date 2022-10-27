@@ -6,4 +6,5 @@
 
 ## Screenshots
 
-![bright](.github/RM-graphics/converter-bright)
+![bright](.github/RM-graphics/converter-bright.jpg)
+![dark](.github/RM-graphics/converter-dark.jpg)
