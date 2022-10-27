@@ -1,6 +1,7 @@
 package de.thu.currencyconverter;
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,8 +9,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.annotation.LayoutRes;
 
 import java.util.List;
 
@@ -50,14 +49,12 @@ public class CurrencyListAdapter extends BaseAdapter {
         }
         //TextView rate_text = view.findViewById(R.id.Rate_text);
         //rate_text.setText(String.valueOf(rate.getRateForOneEuro()));
-        TextView currency_text = (TextView)view.findViewById(R.id.Currency_text);
+        TextView currency_text = (TextView) view.findViewById(R.id.Currency_text);
         currency_text.setText(rate.getCurrencyName());
-        ImageView flag1 = (ImageView)view.findViewById(R.id.flag1);
-        //ImageView flag2 = (ImageView)view.findViewById(R.id.flag2);
-        int imageId = context.getResources().getIdentifier(getFlagId(rate),
-        "drawable", context.getPackageName());
+        ImageView flag1 = (ImageView) view.findViewById(R.id.flag1);
+        @SuppressLint("DiscouragedApi") int imageId = context.getResources().getIdentifier(getFlagId(rate),
+                "drawable", context.getPackageName());
         flag1.setImageResource(imageId);
-        //flag2.setImageResource(imageId);
         return view;
     }
 }

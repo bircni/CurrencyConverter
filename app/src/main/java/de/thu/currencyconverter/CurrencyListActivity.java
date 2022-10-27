@@ -1,15 +1,13 @@
 package de.thu.currencyconverter;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.widget.ListView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Arrays;
 
 public class CurrencyListActivity extends AppCompatActivity {
-
-    //String[] exchangeRates = ExchangeRateDatabase.getCurrencies();
     ExchangeRate[] exchangeRates2 = new ExchangeRateDatabase().getExchangeRates();
 
     @Override

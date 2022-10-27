@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class ExchangeRateDatabase {
     // Exchange rates to EURO - price for 1 Euro
-     private final static ExchangeRate[] RATES = {
+    private final static ExchangeRate[] RATES = {
             new ExchangeRate("EUR", 1.0),
             new ExchangeRate("USD", 1.0845),
             new ExchangeRate("JPY", 130.02),
@@ -20,7 +20,7 @@ public class ExchangeRateDatabase {
             new ExchangeRate("SEK", 9.3207),
             new ExchangeRate("CHF", 1.0439),
             new ExchangeRate("ISK", 141.10),
-			new ExchangeRate("NOK", 8.6545),
+            new ExchangeRate("NOK", 8.6545),
             new ExchangeRate("HRK", 7.6448),
             new ExchangeRate("TRY", 2.8265),
             new ExchangeRate("AUD", 1.4158),
@@ -74,6 +74,7 @@ public class ExchangeRateDatabase {
 
     /**
      * Converts a value from a currency to another one
+     *
      * @return converted value
      */
     public static double convert(double value, String currencyFrom, String currencyTo) {

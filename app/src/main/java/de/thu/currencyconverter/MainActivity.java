@@ -1,11 +1,8 @@
 package de.thu.currencyconverter;
 
 
-
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -19,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     //String[] exchangeRates = ExchangeRateDatabase.getCurrencies();
     ExchangeRate[] exchangeRates2 = new ExchangeRateDatabase().getExchangeRates();
     CurrencyListAdapter adapter = new CurrencyListAdapter(Arrays.asList(exchangeRates2));
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
