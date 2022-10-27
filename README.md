@@ -3,3 +3,7 @@
 # CurrencyConverter
  
  A small Android App to convert currencies
+
+## Screenshots
+
+![bright](.github/RM-graphics/converter-bright)
