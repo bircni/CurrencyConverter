@@ -1,4 +1,4 @@
-[![CurrencyConverter](https://github.com/bircni/CurrencyConverter/actions/workflows/android.yml/badge.svg)](https://github.com/bircni/CurrencyConverter/actions/workflows/android.yml)
+[![CurrencyConverter](https://github.com/bircni/CurrencyConverter/actions/workflows/android.yml/badge.svg?branch=main)](https://github.com/bircni/CurrencyConverter/actions/workflows/android.yml)
 
 # CurrencyConverter
  
