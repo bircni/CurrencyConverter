@@ -11,7 +11,9 @@
 
 ## Screenshots
 
-![bright](.github/RM-graphics/converter-bright.jpg)![dark](.github/RM-graphics/converter-dark.jpg)
+![bright](.github/RM-graphics/converter-bright.jpg)![dark](.github/RM-graphics/converter-dark.jpg)  
+![bright](.github/RM-graphics/converter-bright-ls.jpg)![dark](.github/RM-graphics/converter-dark-ls.jpg)
+
 
 ### Prerequisites
 
