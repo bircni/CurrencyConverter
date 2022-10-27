@@ -56,7 +56,8 @@
         android:inputType="numberDecimal"
         android:textAlignment="textEnd"
         app:layout_constraintStart_toEndOf="@+id/from_value"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:autofillHints="@string/input_value" />
 
     <Button
         android:id="@+id/button"
@@ -71,12 +72,13 @@
 
     <TextView
         android:id="@+id/Converted"
-        android:layout_width="89dp"
-        android:layout_height="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="32dp"
         android:allowUndo="false"
         android:clickable="false"
+        android:maxWidth="210dp"
         android:text="@string/zero"
         android:textAlignment="center"
         android:textSize="24sp"
