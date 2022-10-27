@@ -1,4 +1,4 @@
-name: Android CI
+name: CurrencyConverter
 
 on:
   push:
@@ -13,14 +13,16 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: set up JDK 19
+    - name: set up JDK 17
       uses: actions/setup-java@v3
       with:
-        java-version: '19'
+        java-version: '17'
         distribution: 'temurin'
         cache: gradle
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
+    - name: Gradle init
+      run: ./gradlew init
     - name: Build with Gradle
       run: ./gradlew build
