@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         String from = exchangeRates2[((Spinner) findViewById(R.id.from_value)).getSelectedItemPosition()].getCurrencyName();
         String to = exchangeRates2[((Spinner) findViewById(R.id.to_value)).getSelectedItemPosition()].getCurrencyName();
         EditText number = (EditText) findViewById(R.id.number_input);
-        double amount = Double.parseDouble(number.getText().toString());
+        double amount = number.getText().toString().isEmpty() ? 0 : Double.parseDouble(number.getText().toString());
         //Log.d("amout", String.valueOf(amount));
         double result = ExchangeRateDatabase.convert(amount, from, to);
         //double result = amount;
