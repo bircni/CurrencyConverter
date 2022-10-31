@@ -14,9 +14,6 @@ public class CurrencyListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_currency_list);
-
-        //ArrayAdapter<String> adapter = new ArrayAdapter<>( this,
-        //        R.layout.list_view_item, R.id.text_view, exchangeRates );
         CurrencyListAdapter adapter = new CurrencyListAdapter(Arrays.asList(exchangeRates2));
         ListView listView = (ListView) findViewById(R.id.CurrencyList);
         listView.setAdapter(adapter);

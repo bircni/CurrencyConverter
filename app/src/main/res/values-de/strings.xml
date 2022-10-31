@@ -3,8 +3,9 @@
     <string name="app_name">CurrencyConverter</string>
     <string name="from_value_in">Von</string>
     <string name="to_value_in">Zu</string>
-    <string name="calculate">Berechnen</string>
+    <string name="calculate">Umrechnen</string>
     <string name="zero">0,00</string>
     <string name="flag">Flagge</string>
     <string name="input_value">Gib deinen Wert ein</string>
+    <string name="no_number">Bitte gib einen Wert an, der umgerechnet werden soll!</string>
 </resources>

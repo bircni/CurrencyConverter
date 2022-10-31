@@ -34,11 +34,27 @@ public class CurrencyListAdapter extends BaseAdapter {
         return i;
     }
 
+    /**
+     * @return the flagId
+     */
     private String getFlagId(ExchangeRate rate) {
         return "flag_" + rate.getCurrencyName().toLowerCase();
     }
 
-
+    /**
+     * This method is called for each item in the list. It is responsible for
+     *
+     * @param i         The position of the item within the adapter's data set of the item whose view
+     *                  we want.
+     * @param view      The old view to reuse, if possible. Note: You should check that this view
+     *                  is non-null and of an appropriate type before using. If it is not possible to convert
+     *                  this view to display the correct data, this method can create a new view.
+     *                  Heterogeneous lists can specify their number of view types, so that this View is
+     *                  always of the right type (see {@link #getViewTypeCount()} and
+     *                  {@link #getItemViewType(int)}).
+     * @param viewGroup The parent that this view will eventually be attached to
+     * @return A View corresponding to the data at the specified position.
+     */
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         Context context = viewGroup.getContext();
@@ -47,8 +63,6 @@ public class CurrencyListAdapter extends BaseAdapter {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.cc_list_view_item, null, false);
         }
-        //TextView rate_text = view.findViewById(R.id.Rate_text);
-        //rate_text.setText(String.valueOf(rate.getRateForOneEuro()));
         TextView currency_text = (TextView) view.findViewById(R.id.Currency_text);
         currency_text.setText(rate.getCurrencyName());
         ImageView flag1 = (ImageView) view.findViewById(R.id.flag1);
