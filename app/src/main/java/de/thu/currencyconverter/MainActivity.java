@@ -1,13 +1,18 @@
 package de.thu.currencyconverter;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import java.util.Arrays;
 
@@ -51,8 +56,27 @@ public class MainActivity extends AppCompatActivity {
         from_value.setAdapter(adapter);
         Spinner to_value = findViewById(R.id.to_value);
         to_value.setAdapter(adapter);
+
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.settings_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.my_menu_entry:
+                Log.i("AppBarExample", "Yes, you clicked!");
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
     /**
      * This method is called when the convert button is clicked.
      *
