@@ -2,6 +2,7 @@
 ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?logo=java&logoColor=white)  
 
 [![CurrencyConverter](https://github.com/bircni/CurrencyConverter/actions/workflows/android.yml/badge.svg)](https://github.com/bircni/CurrencyConverter/actions/workflows/android.yml)
+[![Dependency Review](https://github.com/bircni/CurrencyConverter/actions/workflows/dependency-review.yml/badge.svg)](https://github.com/bircni/CurrencyConverter/actions/workflows/dependency-review.yml)
 
 # CurrencyConverter
 
