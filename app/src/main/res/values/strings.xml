@@ -7,5 +7,8 @@
     <string name="zero">0,00</string>
     <string name="flag">Flag</string>
     <string name="input_value">Input your Value</string>
-    <string name="no_number">Please provde an amount to convert</string>
+    <string name="no_number">Please provide an amount to convert</string>
+    <string name="map">Maps</string>
+    <string name="share">Share</string>
+    <string name="share_text">I just converted %s %s to %s %s using Currency Converter</string>
 </resources>

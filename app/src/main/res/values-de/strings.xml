@@ -8,4 +8,7 @@
     <string name="flag">Flagge</string>
     <string name="input_value">Gib deinen Wert ein</string>
     <string name="no_number">Bitte gib einen Wert an, der umgerechnet werden soll!</string>
+    <string name="map">Karten</string>
+    <string name="share">Teilen</string>
+    <string name="share_text">Ich habe gerade %s %s in %s %s umgerechnet mit Currency Converter</string>
 </resources>

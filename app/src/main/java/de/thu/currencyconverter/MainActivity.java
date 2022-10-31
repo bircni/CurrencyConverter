@@ -1,18 +1,22 @@
 package de.thu.currencyconverter;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.ShareActionProvider;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.MenuItemCompat;
 
 import java.util.Arrays;
 
@@ -24,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     ExchangeRate[] exchangeRates2 = new ExchangeRateDatabase().getExchangeRates();
     CurrencyListAdapter adapter = new CurrencyListAdapter(Arrays.asList(exchangeRates2));
 
+    ShareActionProvider shareActionProvider;
     /**
      * Checks if the input is a number > 0
      *
@@ -64,14 +69,27 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.settings_menu, menu);
+        MenuItem shareItem = menu.findItem(R.id.action_share);
+        shareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
+        setShareText(null);
         return true;
+    }
+    private void setShareText(String text) {
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        String share = text;
+        shareIntent.setType("text/plain");
+        if (text != null && !text.isEmpty()) {
+            shareIntent.putExtra(Intent.EXTRA_TEXT, share);
+        }
+        shareActionProvider.setShareIntent(shareIntent);
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.my_menu_entry:
-                Log.i("AppBarExample", "Yes, you clicked!");
+                Intent detailsIntent = new Intent(getApplicationContext(), CurrencyListActivity.class);
+                startActivity(detailsIntent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -92,7 +110,11 @@ public class MainActivity extends AppCompatActivity {
             double amount = number.getText().toString().isEmpty() ? 0 : Double.parseDouble(number.getText().toString());
             double result = ExchangeRateDatabase.convert(amount, from, to);
             TextView result_value = findViewById(R.id.Converted);
-            result_value.setText(String.format(getResources().getConfiguration().getLocales().get(0), "%1.2f", result));
+            String resultF = String.format(getResources().getConfiguration().getLocales().get(0), "%1.2f", result);
+            String amountF = String.format(getResources().getConfiguration().getLocales().get(0), "%1.2f", amount);
+            result_value.setText(resultF);
+            String share = String.format(getString(R.string.share_text),amountF,from,to,resultF);
+            setShareText(share);
         }
     }
 
