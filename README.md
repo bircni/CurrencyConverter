@@ -1,8 +1,11 @@
 ![Android Studio](https://img.shields.io/badge/Android%20Studio-3DDC84.svg?logo=android-studio&logoColor=white)
 ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?logo=java&logoColor=white)  
 
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]  
 [![CurrencyConverter](https://github.com/bircni/CurrencyConverter/actions/workflows/android.yml/badge.svg)](https://github.com/bircni/CurrencyConverter/actions/workflows/android.yml)
-[![Dependency Review](https://github.com/bircni/CurrencyConverter/actions/workflows/dependency-review.yml/badge.svg)](https://github.com/bircni/CurrencyConverter/actions/workflows/dependency-review.yml)
+[![Dependency Review](https://github.com/bircni/CurrencyConverter/actions/workflows/dependency-review.yml/badge.svg)](https://github.com/bircni/CurrencyConverter/actions/workflows/dependency-review.yml)  
 
 # CurrencyConverter
 
@@ -43,3 +46,15 @@ If you want to contribute - open an issue or a pull request.
 3. Commit your Changes (`git commit -m 'added something new'`)
 4. Push to the Branch (`git push origin feature/CurrencyCool`)
 5. Open a Pull Request
+
+
+[contributors-shield]: https://img.shields.io/github/contributors/bircni/CurrencyConverter.svg
+[contributors-url]: https://github.com/bircni/CurrencyConverter/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/bircni/CurrencyConverter.svg
+[forks-url]: https://github.com/bircni/CurrencyConverter/network/members
+[stars-shield]: https://img.shields.io/github/stars/bircni/CurrencyConverter.svg
+[stars-url]: https://github.com/bircni/CurrencyConverter/stargazers
+[issues-shield]: https://img.shields.io/github/issues/bircni/CurrencyConverter.svg
+[issues-url]: https://github.com/bircni/CurrencyConverter/issues
+[license-shield]: https://img.shields.io/github/license/bircni/CurrencyConverter.svg
+[license-url]: https://github.com/bircni/CurrencyConverter/blob/main/LICENSE
