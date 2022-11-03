@@ -4,7 +4,7 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]  
-[![CurrencyConverter](https://github.com/bircni/CurrencyConverter/actions/workflows/android.yml/badge.svg)](https://github.com/bircni/CurrencyConverter/actions/workflows/android.yml)
+[![CurrencyConverter ](https://github.com/bircni/CurrencyConverter/actions/workflows/android.yml/badge.svg)](https://github.com/bircni/CurrencyConverter/actions/workflows/android.yml) 
 [![Dependency Review](https://github.com/bircni/CurrencyConverter/actions/workflows/dependency-review.yml/badge.svg)](https://github.com/bircni/CurrencyConverter/actions/workflows/dependency-review.yml)  
 
 # CurrencyConverter
