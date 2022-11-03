@@ -1,7 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ListView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/CurrencyList"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CurrencyListActivity" />
+    tools:context=".MainActivity">
+<androidx.appcompat.widget.Toolbar
+    android:id="@+id/toolbar_list"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/colorPrimary"
+    android:minHeight="?attr/actionBarSize"
+    android:theme="@style/Theme.currencyconverter.toolbar"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+    <ListView
+        android:id="@+id/CurrencyList"
+        android:layout_width="400dp"
+        android:layout_height="675dp"
+        android:layout_marginStart="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_list"
+        app:layout_constraintVertical_bias="1.0"
+        tools:context=".CurrencyListActivity" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
