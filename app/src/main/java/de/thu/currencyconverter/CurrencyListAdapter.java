@@ -20,6 +20,9 @@ public class CurrencyListAdapter extends BaseAdapter {
         this.rate_data = rate_data;
     }
 
+    public void notifyData() {
+        this.notifyDataSetChanged();
+    }
     @Override
     public int getCount() {
         return rate_data.size();

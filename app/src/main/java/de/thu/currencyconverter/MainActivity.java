@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
 
     ExchangeRate[] exchangeRates2 = new ExchangeRateDatabase().getExchangeRates();
     CurrencyListAdapter adapter = new CurrencyListAdapter(Arrays.asList(exchangeRates2));
-
     ShareActionProvider shareActionProvider;
     /**
      * Checks if the input is a number > 0
@@ -87,9 +86,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.my_menu_entry:
+            case R.id.maps_menu:
                 Intent detailsIntent = new Intent(getApplicationContext(), CurrencyListActivity.class);
                 startActivity(detailsIntent);
+                return true;
+            case R.id.edit_menu:
+                Intent editIntent = new Intent(getApplicationContext(), EditActivity.class);
+                startActivity(editIntent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
