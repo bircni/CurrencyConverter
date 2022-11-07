@@ -20,13 +20,15 @@ import androidx.core.view.MenuItemCompat;
 
 import java.util.Arrays;
 
+import io.paperdb.Paper;
+
 /**
  * Main activity of the app.
  */
 public class MainActivity extends AppCompatActivity {
 
-    ExchangeRate[] exchangeRates2 = new ExchangeRateDatabase().getExchangeRates();
-    CurrencyListAdapter adapter = new CurrencyListAdapter(Arrays.asList(exchangeRates2));
+    ExchangeRate[] exchangeRates2; // = new ExchangeRateDatabase().getExchangeRates();
+    CurrencyListAdapter adapter; // = new CurrencyListAdapter(Arrays.asList(exchangeRates2));
     ShareActionProvider shareActionProvider;
     /**
      * Checks if the input is a number > 0
@@ -56,11 +58,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Paper.init(this);
+        //NEW
+        exchangeRates2 = new ExchangeRateDatabase().getExchangeRates();
+        adapter = new CurrencyListAdapter(Arrays.asList(exchangeRates2));
         Spinner from_value = findViewById(R.id.from_value);
         from_value.setAdapter(adapter);
         Spinner to_value = findViewById(R.id.to_value);
         to_value.setAdapter(adapter);
-
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
@@ -104,6 +109,9 @@ public class MainActivity extends AppCompatActivity {
      * @param view The view that was clicked.
      */
     public void onConvertClick(View view) {
+        //Add new PaperDB
+        ExchangeRate[] exRate = Paper.book().read("Database");
+        Log.d("Test",exRate.toString());
         String from = exchangeRates2[((Spinner) findViewById(R.id.from_value)).getSelectedItemPosition()].getCurrencyName();
         String to = exchangeRates2[((Spinner) findViewById(R.id.to_value)).getSelectedItemPosition()].getCurrencyName();
         EditText number = findViewById(R.id.number_input);

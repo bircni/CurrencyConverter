@@ -4,10 +4,13 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Random;
+
+import io.paperdb.Paper;
 
 public class ExchangeRateDatabase {
     // Exchange rates to EURO - price for 1 Euro
-    private final static ExchangeRate[] RATES = {
+    private /*final*/ static ExchangeRate[] RATES = {
             new ExchangeRate("EUR", "Bruxelles", 1.0),
             new ExchangeRate("USD", "Washington", 1.0845),
             new ExchangeRate("JPY", "Tokyo", 130.02),
@@ -56,7 +59,11 @@ public class ExchangeRateDatabase {
         Arrays.sort(CURRENCIES_LIST);
 
     }
-
+    ExchangeRateDatabase() {
+        if (!Paper.book().contains("Database")) {
+            Paper.book().write("Database", RATES);
+        }
+    }
     /**
      * Gets exchange rate for currency (equivalent for one Euro)
      */
