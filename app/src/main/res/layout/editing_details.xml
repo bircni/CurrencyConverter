@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".MainActivity"
+tools:ignore="ExtraText">
+<androidx.appcompat.widget.Toolbar
+    android:id="@+id/toolbar_list"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/colorPrimary"
+    android:minHeight="?attr/actionBarSize"
+    android:theme="@style/Theme.currencyconverter.toolbar"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/edit_details"
+        android:layout_width="279dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="40dp"
+        android:autofillHints="Please enter the new rate"
+        android:gravity="center"
+        android:hint="@string/edit_currency"
+        android:imeOptions="actionDone"
+        android:inputType="numberDecimal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_list"
+        app:layout_constraintVertical_bias="0.467"
+        tools:context=".EditingDetails" />
+
+    <TextView
+        android:id="@+id/currentRate"
+        android:layout_width="174dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_list" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,13 +1,17 @@
 package de.thu.currencyconverter;
 
+import android.util.Log;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import io.paperdb.Paper;
+
 public class ExchangeRateDatabase {
     // Exchange rates to EURO - price for 1 Euro
-    private final static ExchangeRate[] RATES = {
+    private static final ExchangeRate[] RATES = {
             new ExchangeRate("EUR", "Bruxelles", 1.0),
             new ExchangeRate("USD", "Washington", 1.0845),
             new ExchangeRate("JPY", "Tokyo", 130.02),
@@ -20,7 +24,7 @@ public class ExchangeRateDatabase {
             new ExchangeRate("RON", "Bucharest", 4.4050),
             new ExchangeRate("SEK", "Stockholm", 9.3207),
             new ExchangeRate("CHF", "Bern", 1.0439),
-            new ExchangeRate("ISK", "Rejkjavic", 141.10),
+            new ExchangeRate("ISK", "Reykjavik", 141.10),
             new ExchangeRate("NOK", "Oslo", 8.6545),
             new ExchangeRate("HRK", "Zagreb", 7.6448),
             new ExchangeRate("TRY", "Ankara", 2.8265),
@@ -42,6 +46,7 @@ public class ExchangeRateDatabase {
             new ExchangeRate("ZAR", "Cape Town", 13.1446)
     };
 
+
     private final static Map<String, ExchangeRate> CURRENCIES_MAP = new HashMap<>();
 
     private final static String[] CURRENCIES_LIST;
@@ -56,6 +61,11 @@ public class ExchangeRateDatabase {
         Arrays.sort(CURRENCIES_LIST);
 
     }
+    public static void initDB() {
+        if (!Paper.book().contains("Database")) {
+            Paper.book().write("Database", RATES);
+        }
+    }
 
     /**
      * Gets exchange rate for currency (equivalent for one Euro)
@@ -65,6 +75,17 @@ public class ExchangeRateDatabase {
         return Objects.requireNonNull(CURRENCIES_MAP.get(currency)).getRateForOneEuro();
     }
 
+    public static double getExchangeRatePaper(String currency) {
+        ExchangeRate[] rates = Paper.book().read("Database");
+        assert rates != null;
+        for (ExchangeRate r : rates) {
+            if (r.getCurrencyName().equals(currency)) {
+                return r.getRateForOneEuro();
+            }
+        }
+        return 0;
+    }
+
     /**
      * Converts a value from a currency to another one
      *
@@ -72,6 +93,17 @@ public class ExchangeRateDatabase {
      */
     public static double convert(double value, String currencyFrom, String currencyTo) {
         return value / getExchangeRate(currencyFrom) * getExchangeRate(currencyTo);
+    }
+
+    //NEW CONVERT
+    public static double convertPaper(double value, int currencyFrom, int currencyTo) {
+        ExchangeRate[] er = Paper.book().read("Database");
+        assert er != null;
+        String from = er[currencyFrom].getCurrencyName();
+        Log.d("Convert:", from);
+        String to = er[currencyTo].getCurrencyName();
+        Log.d("Convert", to);
+        return value / getExchangeRatePaper(from) * getExchangeRatePaper(to);
     }
 
     /**

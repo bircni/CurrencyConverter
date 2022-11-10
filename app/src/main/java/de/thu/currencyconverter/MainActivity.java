@@ -3,14 +3,13 @@ package de.thu.currencyconverter;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,14 +19,15 @@ import androidx.core.view.MenuItemCompat;
 
 import java.util.Arrays;
 
+import io.paperdb.Paper;
+
 /**
  * Main activity of the app.
  */
 public class MainActivity extends AppCompatActivity {
 
-    ExchangeRate[] exchangeRates2 = new ExchangeRateDatabase().getExchangeRates();
-    CurrencyListAdapter adapter = new CurrencyListAdapter(Arrays.asList(exchangeRates2));
-
+    ExchangeRate[] exchangeRates; // = new ExchangeRateDatabase().getExchangeRates();
+    CurrencyListAdapter adapter; // = new CurrencyListAdapter(Arrays.asList(exchangeRates2));
     ShareActionProvider shareActionProvider;
     /**
      * Checks if the input is a number > 0
@@ -51,18 +51,24 @@ public class MainActivity extends AppCompatActivity {
      *
      * @param savedInstanceState If the activity is being re-initialized after
      *                           previously being shut down then this Bundle contains the data it most
-     *                           recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *                           recently supplied in {@link #onSaveInstanceState}.
+     *                           Note: Otherwise it is null.
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Paper.init(this);
+        ExchangeRateDatabase.initDB();
+        exchangeRates = Paper.book().read("Database");
+        //NEW
+        assert exchangeRates != null;
+        adapter = new CurrencyListAdapter(Arrays.asList(exchangeRates));
         Spinner from_value = findViewById(R.id.from_value);
         from_value.setAdapter(adapter);
         Spinner to_value = findViewById(R.id.to_value);
         to_value.setAdapter(adapter);
-
-        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
 
@@ -76,20 +82,27 @@ public class MainActivity extends AppCompatActivity {
     }
     private void setShareText(String text) {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
-        String share = text;
         shareIntent.setType("text/plain");
         if (text != null && !text.isEmpty()) {
-            shareIntent.putExtra(Intent.EXTRA_TEXT, share);
+            shareIntent.putExtra(Intent.EXTRA_TEXT, text);
         }
         shareActionProvider.setShareIntent(shareIntent);
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.my_menu_entry:
+            case R.id.maps_menu:
                 Intent detailsIntent = new Intent(getApplicationContext(), CurrencyListActivity.class);
                 startActivity(detailsIntent);
+                return true;
+            case R.id.edit_menu:
+                Intent editIntent = new Intent(getApplicationContext(), EditActivity.class);
+                startActivity(editIntent);
+                return true;
+            case R.id.reset_menu:
+                Paper.book().write("Database", new ExchangeRateDatabase().getExchangeRates());
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -101,14 +114,20 @@ public class MainActivity extends AppCompatActivity {
      * @param view The view that was clicked.
      */
     public void onConvertClick(View view) {
-        String from = exchangeRates2[((Spinner) findViewById(R.id.from_value)).getSelectedItemPosition()].getCurrencyName();
-        String to = exchangeRates2[((Spinner) findViewById(R.id.to_value)).getSelectedItemPosition()].getCurrencyName();
+        adapter.notifyDataSetChanged();
+        //ExchangeRate [] convRate = Paper.book().read("Database");
+        Spinner from_value = findViewById(R.id.from_value);
+        Spinner to_value = findViewById(R.id.to_value);
+        String from = exchangeRates[from_value.getSelectedItemPosition()].getCurrencyName();
+        int fromInt = from_value.getSelectedItemPosition();
+        int toInt = to_value.getSelectedItemPosition();
+        String to = exchangeRates[to_value.getSelectedItemPosition()].getCurrencyName();
         EditText number = findViewById(R.id.number_input);
         if (!checkInput(number.getText().toString())) {
             displayAlert(getString(R.string.no_number));
         } else {
             double amount = number.getText().toString().isEmpty() ? 0 : Double.parseDouble(number.getText().toString());
-            double result = ExchangeRateDatabase.convert(amount, from, to);
+            double result = ExchangeRateDatabase.convertPaper(amount, fromInt, toInt);
             TextView result_value = findViewById(R.id.Converted);
             String resultF = String.format(getResources().getConfiguration().getLocales().get(0), "%1.2f", result);
             String amountF = String.format(getResources().getConfiguration().getLocales().get(0), "%1.2f", amount);

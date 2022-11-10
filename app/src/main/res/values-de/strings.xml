@@ -9,6 +9,11 @@
     <string name="input_value">Gib deinen Wert ein</string>
     <string name="no_number">Bitte gib einen Wert an, der umgerechnet werden soll!</string>
     <string name="map">Karten</string>
+    <string name="edit">Bearbeiten</string>
     <string name="share">Teilen</string>
     <string name="share_text">Ich habe gerade %s %s in %s %s umgerechnet mit Currency Converter</string>
+    <string name="edit_currency">Umrechnungsrate bearbeiten</string>
+    <string name="edit_text">Bearbeiten: %s</string>
+    <string name="reset">Zurücksetzen</string>
+    <string name="current_rate">Aktuelle Rate: %s</string>
 </resources>
