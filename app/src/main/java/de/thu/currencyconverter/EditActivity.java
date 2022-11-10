@@ -24,7 +24,7 @@ import io.paperdb.Paper;
 
 public class EditActivity extends AppCompatActivity {
     //TEST
-    ExchangeRate[] exchangeRates2 = Paper.book().read("Database");
+    ExchangeRate[] exchangeRates2; // = Paper.book().read("Database");
     //ExchangeRate[] exchangeRates2 = new ExchangeRateDatabase().getExchangeRates();
     ActivityResultLauncher<Intent> activityResultLauncher;
 
@@ -32,6 +32,7 @@ public class EditActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_curency);
+        exchangeRates2 = Paper.book().read("Database");
         CurrencyListAdapter adapter = new CurrencyListAdapter(Arrays.asList(exchangeRates2));
         ListView listView = (ListView) findViewById(R.id.CurrencyList);
         listView.setAdapter(adapter);

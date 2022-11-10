@@ -59,7 +59,7 @@ public class ExchangeRateDatabase {
         Arrays.sort(CURRENCIES_LIST);
 
     }
-    ExchangeRateDatabase() {
+    public static void initDB() {
         if (!Paper.book().contains("Database")) {
             Paper.book().write("Database", RATES);
         }
@@ -79,6 +79,14 @@ public class ExchangeRateDatabase {
      */
     public static double convert(double value, String currencyFrom, String currencyTo) {
         return value / getExchangeRate(currencyFrom) * getExchangeRate(currencyTo);
+    }
+
+    //NEW CONVERT
+    public static double convertNEW(double value, int currencyFrom, int currencyTo) {
+        ExchangeRate [] er =  Paper.book().read("Database");
+        String from = er[currencyFrom].getCurrencyName();
+        String to = er[currencyTo].getCurrencyName();
+        return value / getExchangeRate(from) * getExchangeRate(to);
     }
 
     /**
