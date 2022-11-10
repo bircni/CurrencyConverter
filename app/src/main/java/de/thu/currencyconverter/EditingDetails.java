@@ -1,21 +1,19 @@
 package de.thu.currencyconverter;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.inputmethod.EditorInfo;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.KeyEvent;
-import android.view.MenuItem;
-import android.view.inputmethod.EditorInfo;
-import android.widget.ImageView;
-import android.widget.TextView;
+import io.paperdb.Paper;
 
 public class EditingDetails extends AppCompatActivity {
 
     String currencyName = null;
-    double currencyRate;
     String actionBar;
     int position;
 
@@ -26,12 +24,14 @@ public class EditingDetails extends AppCompatActivity {
         Intent iin = getIntent();
         Bundle b = iin.getExtras();
         TextView currRate = findViewById(R.id.currentRate);
+        ExchangeRate[] exchangeRates = Paper.book().read("Database");
         if (b != null) {
             currencyName = (String) b.get("currencyName");
-            currencyRate = (Double) b.get("currentRate");
             position = (int) b.get("position");
         }
-        currRate.setText("Current rate: " + String.valueOf(currencyRate));
+        assert exchangeRates != null;
+        String rate = String.format(getResources().getConfiguration().getLocales().get(0), "%1.2f", exchangeRates[position].rateForOneEuro);
+        currRate.setText(String.format(getString(R.string.current_rate), rate));
         if (currencyName != null) {
             actionBar = String.format(getString(R.string.edit_text), currencyName);
         } else {

@@ -14,4 +14,6 @@
     <string name="share_text">I just converted %s %s to %s %s using Currency Converter</string>
     <string name="edit_currency">Edit Currency Rate</string>
     <string name="edit_text">Editing %s</string>
+    <string name="reset">Reset</string>
+    <string name="current_rate">Current rate: %s</string>
 </resources>

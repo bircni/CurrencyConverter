@@ -6,7 +6,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,9 +19,6 @@ public class CurrencyListAdapter extends BaseAdapter {
         this.rate_data = rate_data;
     }
 
-    public void notifyData() {
-        this.notifyDataSetChanged();
-    }
     @Override
     public int getCount() {
         return rate_data.size();
@@ -38,9 +34,9 @@ public class CurrencyListAdapter extends BaseAdapter {
         return i;
     }
 
-    public interface OnItemClickListener {
-        void onItemClick(AdapterView<?> parent, View view, int position, long id);
-    }
+    //public interface OnItemClickListener {
+    //    void onItemClick(AdapterView<?> parent, View view, int position, long id);
+    //}
 
     /**
      * @return the flagId
@@ -63,6 +59,7 @@ public class CurrencyListAdapter extends BaseAdapter {
      * @param viewGroup The parent that this view will eventually be attached to
      * @return A View corresponding to the data at the specified position.
      */
+    @SuppressLint("InflateParams")
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         Context context = viewGroup.getContext();

@@ -13,6 +13,11 @@
         android:visible="true"
         app:showAsAction="never|withText" />
     <item
+        android:id="@+id/reset_menu"
+        android:title="@string/reset"
+        android:visible="true"
+        app:showAsAction="never|withText" />
+    <item
         android:id="@+id/action_share"
         android:title="@string/share"
         app:showAsAction="ifRoom"
