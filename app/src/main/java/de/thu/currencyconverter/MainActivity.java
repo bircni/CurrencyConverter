@@ -3,6 +3,7 @@ package de.thu.currencyconverter;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +18,11 @@ import androidx.appcompat.widget.ShareActionProvider;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.MenuItemCompat;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserFactory;
+
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.Arrays;
 
 import io.paperdb.Paper;
@@ -61,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         Paper.init(this);
         ExchangeRateDatabase.initDB();
         exchangeRates = Paper.book().read("Database");
+        updateCurrencies();
         //NEW
         assert exchangeRates != null;
         adapter = new CurrencyListAdapter(Arrays.asList(exchangeRates));
@@ -104,10 +111,48 @@ public class MainActivity extends AppCompatActivity {
             case R.id.reset_menu:
                 Paper.book().write("Database", new ExchangeRateDatabase().getExchangeRates());
                 return true;
+            case R.id.refresh_menu:
+                updateCurrencies();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    private void updateCurrencies() {
+        Thread thread = new Thread(() -> {
+            try {
+                String webString = "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml";
+                try {
+                    URL url = new URL(webString);
+                    URLConnection connection = url.openConnection();
+                    XmlPullParser parser = XmlPullParserFactory.newInstance().newPullParser();
+                    parser.setInput(connection.getInputStream(), connection.getContentEncoding());
+                    int eventType = parser.getEventType();
+                    while (eventType != XmlPullParser.END_DOCUMENT) {
+                        if (eventType == XmlPullParser.START_TAG) {
+                            if (parser.getName().equals("Cube")) {
+                                String currency = parser.getAttributeValue(null, "currency");
+                                String rate = parser.getAttributeValue(null, "rate");
+                                if (currency != null && rate != null) {
+                                    ExchangeRateDatabase.setRates(currency, rate);
+                                }
+                            }
+                        }
+                        eventType = parser.next();
+                    }
+                } catch (Exception e) {
+                    Log.e("ErrorURL", "Error with XML: " + e.getMessage());
+                    throw new RuntimeException(e);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        thread.start();
+
+    }
+
     /**
      * This method is called when the convert button is clicked.
      *

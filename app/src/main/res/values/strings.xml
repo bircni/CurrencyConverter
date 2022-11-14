@@ -16,4 +16,5 @@
     <string name="edit_text">Editing %s</string>
     <string name="reset">Reset</string>
     <string name="current_rate">Current rate: %s</string>
+    <string name="refresh">Refresh</string>
 </resources>
