@@ -24,14 +24,14 @@ public class EditActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_curency);
         exchangeRates = Paper.book().read("Database");
         assert exchangeRates != null;
-        CurrencyListAdapter adapter = new CurrencyListAdapter(Arrays.asList(exchangeRates));
-        ListView listView = (ListView) findViewById(R.id.CurrencyList);
+        CurrencyEditAdapter adapter = new CurrencyEditAdapter(Arrays.asList(exchangeRates));
+        ListView listView = findViewById(R.id.CurrencyListEdit);
         listView.setAdapter(adapter);
 
         activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
             if (result.getResultCode() == RESULT_OK) {
                 Intent data = result.getData();
-                CurrencyListAdapter adapter1 = new CurrencyListAdapter(Arrays.asList(exchangeRates));
+                CurrencyEditAdapter adapter1 = new CurrencyEditAdapter(Arrays.asList(exchangeRates));
                 assert data != null;
                 String newRate = data.getStringExtra("newCurrencyRate");
                 int position = data.getIntExtra("position", 0);
@@ -51,7 +51,7 @@ public class EditActivity extends AppCompatActivity {
             i.putExtra("position", position);
             activityResultLauncher.launch(i);
         });
-        Toolbar toolbar_list = (Toolbar)findViewById(R.id.toolbar_list);
+        Toolbar toolbar_list = findViewById(R.id.toolbar_list);
         setSupportActionBar(toolbar_list);
         if (getSupportActionBar() != null){
             getSupportActionBar().setTitle(getString(R.string.edit_currency));

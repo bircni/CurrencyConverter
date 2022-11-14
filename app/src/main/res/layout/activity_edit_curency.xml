@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
-        android:id="@+id/CurrencyList"
+        android:id="@+id/CurrencyListEdit"
         android:layout_width="406dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"

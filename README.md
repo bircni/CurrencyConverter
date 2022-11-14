@@ -1,29 +1,37 @@
 ![Android Studio](https://img.shields.io/badge/Android%20Studio-3DDC84.svg?logo=android-studio&logoColor=white)
 ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?logo=java&logoColor=white)  
-
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]  
-[![Gradle Build](https://github.com/bircni/CurrencyConverter/actions/workflows/android.yml/badge.svg)](https://github.com/bircni/CurrencyConverter/actions/workflows/android.yml) 
+[![Gradle Build](https://github.com/bircni/CurrencyConverter/actions/workflows/android.yml/badge.svg)](https://github.com/bircni/CurrencyConverter/actions/workflows/android.yml)
 [![Dependency Review](https://github.com/bircni/CurrencyConverter/actions/workflows/dependency-review.yml/badge.svg)](https://github.com/bircni/CurrencyConverter/actions/workflows/dependency-review.yml)  
 
 # CurrencyConverter
 
 ## About The Project
 
- A small Android App to convert currencies
+ A small Android App to convert currencies.
+
+- Supports multiple currencies and offline mode.
+- Uses [EuropeanCentralBank API](www.ecb.europa.eu) to fetch the latest exchange rates.
+- Uses [Paper](https://github.com/pilgr/Paper) to store the exchange rates locally.
+- Currency rates are updated every 24 hours.
+- Languages: German, English (default)
 
 ## Screenshots
 
-![bright](.github/RM-graphics/converter-bright.jpg)![dark](.github/RM-graphics/converter-dark.jpg)  
-![bright](.github/RM-graphics/converter-bright-ls.jpg)![dark](.github/RM-graphics/converter-dark-ls.jpg)
-
+<div>
+<img src=".github/RM-graphics/converter-bright.png" alt="drawing" width="400"/>
+<img src=".github/RM-graphics/converter-dark.png" alt="drawing" width="400"/>
+</div>
+<!--![bright](.github/RM-graphics/converter-bright.png)![dark](.github/RM-graphics/converter-dark.png) -->
+<!-- ![bright](.github/RM-graphics/converter-bright-ls.jpg)![dark](.github/RM-graphics/converter-dark-ls.jpg)-->
 
 ### Prerequisites
 
-* Android Studio
-* Android SDK
-* Android N (API 24) or higher
+- Android Studio
+- Android SDK
+- Android N (API 24) or higher
 
 ### Installation
 
@@ -47,11 +55,6 @@ If you want to contribute - open an issue or a pull request.
 4. Push to the Branch (`git push origin feature/CurrencyCool`)
 5. Open a Pull Request
 
-
-[contributors-shield]: https://img.shields.io/github/contributors/bircni/CurrencyConverter.svg
-[contributors-url]: https://github.com/bircni/CurrencyConverter/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/bircni/CurrencyConverter.svg
-[forks-url]: https://github.com/bircni/CurrencyConverter/network/members
 [stars-shield]: https://img.shields.io/github/stars/bircni/CurrencyConverter.svg
 [stars-url]: https://github.com/bircni/CurrencyConverter/stargazers
 [issues-shield]: https://img.shields.io/github/issues/bircni/CurrencyConverter.svg

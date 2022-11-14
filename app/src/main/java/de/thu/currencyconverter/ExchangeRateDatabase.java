@@ -86,16 +86,27 @@ public class ExchangeRateDatabase {
         return 0;
     }
 
+    public static void setRates(String currency, String rate) {
+        double rateD = Double.parseDouble(rate);
+        if (!Paper.book().contains("Database")) {
+            Paper.book().write("Database", RATES);
+        }
+        ExchangeRate[] rates = Paper.book().read("Database");
+        assert rates != null;
+        for (ExchangeRate r : rates) {
+            if (r.getCurrencyName().equals(currency)) {
+                r.rateForOneEuro = rateD;
+                Log.d("Database", "setRates: " + rateD);
+            }
+        }
+        Paper.book().write("Database", rates);
+    }
+
     /**
-     * Converts a value from a currency to another one
+     * Converts a value from a currency to another by accessing the Paper.db
      *
      * @return converted value
      */
-    public static double convert(double value, String currencyFrom, String currencyTo) {
-        return value / getExchangeRate(currencyFrom) * getExchangeRate(currencyTo);
-    }
-
-    //NEW CONVERT
     public static double convertPaper(double value, int currencyFrom, int currencyTo) {
         ExchangeRate[] er = Paper.book().read("Database");
         assert er != null;
@@ -104,14 +115,6 @@ public class ExchangeRateDatabase {
         String to = er[currencyTo].getCurrencyName();
         Log.d("Convert", to);
         return value / getExchangeRatePaper(from) * getExchangeRatePaper(to);
-    }
-
-    /**
-     * Returns list of currency names
-     */
-
-    public String[] getCurrencies() {
-        return CURRENCIES_LIST;
     }
 
     public String getCapital(String currency) {
