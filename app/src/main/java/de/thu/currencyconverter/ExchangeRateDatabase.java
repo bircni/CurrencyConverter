@@ -68,14 +68,9 @@ public class ExchangeRateDatabase {
     }
 
     /**
-     * Gets exchange rate for currency (equivalent for one Euro)
+     * Gets exchange rate for currency (equivalent for one Euro) from PaperDB
      */
-
     public static double getExchangeRate(String currency) {
-        return Objects.requireNonNull(CURRENCIES_MAP.get(currency)).getRateForOneEuro();
-    }
-
-    public static double getExchangeRatePaper(String currency) {
         ExchangeRate[] rates = Paper.book().read("Database");
         assert rates != null;
         for (ExchangeRate r : rates) {
@@ -114,7 +109,7 @@ public class ExchangeRateDatabase {
         Log.d("Convert:", from);
         String to = er[currencyTo].getCurrencyName();
         Log.d("Convert", to);
-        return value / getExchangeRatePaper(from) * getExchangeRatePaper(to);
+        return value / getExchangeRate(from) * getExchangeRate(to);
     }
 
     public String getCapital(String currency) {

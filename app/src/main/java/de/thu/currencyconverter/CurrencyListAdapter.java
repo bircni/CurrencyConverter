@@ -34,10 +34,6 @@ public class CurrencyListAdapter extends BaseAdapter {
         return i;
     }
 
-    //public interface OnItemClickListener {
-    //    void onItemClick(AdapterView<?> parent, View view, int position, long id);
-    //}
-
     /**
      * @return the flagId
      */
