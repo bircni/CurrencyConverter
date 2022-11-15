@@ -14,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.widget.ShareActionProvider;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.MenuItemCompat;
@@ -78,10 +79,17 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
-
+    //TODO: RestrictedApi solve
+    @SuppressLint("RestrictedApi")
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.settings_menu, menu);
+        if(menu instanceof MenuBuilder) {  //To display icon on overflow menu
+
+            MenuBuilder m = (MenuBuilder) menu;
+            m.setOptionalIconsVisible(true);
+
+        }
         MenuItem shareItem = menu.findItem(R.id.action_share);
         shareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
         setShareText(null);
@@ -114,6 +122,8 @@ public class MainActivity extends AppCompatActivity {
             case R.id.refresh_menu:
                 updateCurrencies();
                 return true;
+                case R.id.about_menu:
+                    startActivity(new Intent(getApplicationContext(), About.class));
             default:
                 return super.onOptionsItemSelected(item);
         }

@@ -3,28 +3,40 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/refresh_menu"
+        android:title="@string/refresh"
+        android:icon="@drawable/refresh_icon"
+        android:visible="true"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/maps_menu"
         android:title="@string/map"
         android:visible="true"
+        android:icon="@drawable/map_icon"
         app:showAsAction="never|withText" />
     <item
         android:id="@+id/edit_menu"
         android:title="@string/edit"
         android:visible="true"
-        app:showAsAction="never|withText" />
-    <item
-        android:id="@+id/refresh_menu"
-        android:title="@string/refresh"
-        android:visible="true"
+        android:icon="@drawable/edit_icon"
         app:showAsAction="never|withText" />
     <item
         android:id="@+id/reset_menu"
         android:title="@string/reset"
         android:visible="true"
+        android:icon="@drawable/reset_icon"
+        app:showAsAction="never|withText" />
+    <item
+        android:id="@+id/about_menu"
+        android:title="@string/about"
+        android:visible="true"
+        android:icon="@drawable/about_icon"
+        android:orderInCategory="@android:integer/config_longAnimTime"
         app:showAsAction="never|withText" />
     <item
         android:id="@+id/action_share"
         android:title="@string/share"
-        app:showAsAction="ifRoom"
+        android:icon="@drawable/share_icon"
+        app:showAsAction="never"
         app:actionProviderClass="androidx.appcompat.widget.ShareActionProvider" />
 </menu>
