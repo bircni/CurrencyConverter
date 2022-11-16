@@ -14,6 +14,7 @@
         <!-- Customize your theme here. -->
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="iconTint">@color/black</item>
     </style>
     <style name="Theme.currencyconverter.toolbar" parent="Theme.currencyconverter">
         <item name="android:textColorPrimary">@color/black</item>

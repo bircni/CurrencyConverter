@@ -1,7 +1,11 @@
 package de.thu.currencyconverter;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -10,10 +14,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.widget.ShareActionProvider;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.MenuItemCompat;
@@ -78,10 +83,17 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
-
+    //TODO: RestrictedApi solve
+    @SuppressLint("RestrictedApi")
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.settings_menu, menu);
+        if(menu instanceof MenuBuilder) {  //To display icon on overflow menu
+
+            MenuBuilder m = (MenuBuilder) menu;
+            m.setOptionalIconsVisible(true);
+
+        }
         MenuItem shareItem = menu.findItem(R.id.action_share);
         shareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
         setShareText(null);
@@ -110,10 +122,13 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.reset_menu:
                 Paper.book().write("Database", new ExchangeRateDatabase().getExchangeRates());
+                Toast.makeText(this,getString(R.string.currency_reset), Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.refresh_menu:
                 updateCurrencies();
                 return true;
+                case R.id.about_menu:
+                    startActivity(new Intent(getApplicationContext(), AboutActivity.class));
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -149,8 +164,24 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         });
-        thread.start();
+        if(hasInternetConnection(this)) {
+            Toast.makeText(this, getString(R.string.currency_update), Toast.LENGTH_SHORT).show();
+            thread.start();
+        } else {
+            Toast.makeText(this, getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
+        }
+    }
 
+    public static boolean hasInternetConnection(final Context context) {
+        final ConnectivityManager connectivityManager = (ConnectivityManager)context.
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        final Network network = connectivityManager.getActiveNetwork();
+        final NetworkCapabilities capabilities = connectivityManager
+                .getNetworkCapabilities(network);
+
+        return capabilities != null
+                && capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED);
     }
 
     /**
@@ -169,7 +200,8 @@ public class MainActivity extends AppCompatActivity {
         String to = exchangeRates[to_value.getSelectedItemPosition()].getCurrencyName();
         EditText number = findViewById(R.id.number_input);
         if (!checkInput(number.getText().toString())) {
-            displayAlert(getString(R.string.no_number));
+            Toast.makeText(this, getString(R.string.no_number), Toast.LENGTH_LONG).show();
+            //displayAlert(getString(R.string.no_number));
         } else {
             double amount = number.getText().toString().isEmpty() ? 0 : Double.parseDouble(number.getText().toString());
             double result = ExchangeRateDatabase.convertPaper(amount, fromInt, toInt);
@@ -180,19 +212,5 @@ public class MainActivity extends AppCompatActivity {
             String share = String.format(getString(R.string.share_text),amountF,from,to,resultF);
             setShareText(share);
         }
-    }
-
-    /**
-     * Displays an Alert on the phone screen
-     *
-     * @param message the message to be displayed
-     */
-    private void displayAlert(String message) {
-        AlertDialog.Builder alert = new AlertDialog.Builder(this);
-        alert.setMessage(message);
-        alert.setCancelable(true);
-        alert.setPositiveButton("Ok", (dialog, id) -> dialog.cancel());
-        AlertDialog dialog = alert.create();
-        dialog.show();
     }
 }

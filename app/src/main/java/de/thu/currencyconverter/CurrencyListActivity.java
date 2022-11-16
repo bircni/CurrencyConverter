@@ -20,7 +20,7 @@ public class CurrencyListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_currency_list);
         CurrencyListAdapter adapter = new CurrencyListAdapter(Arrays.asList(exchangeRates2));
-        ListView listView = (ListView) findViewById(R.id.CurrencyList);
+        ListView listView = findViewById(R.id.CurrencyList);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener((parent, view, position, id) -> {
             String url = "geo:0,0?q=" + db.getCapital(exchangeRates2[position].getCurrencyName());
@@ -28,7 +28,7 @@ public class CurrencyListActivity extends AppCompatActivity {
             startActivity(i);
 
         });
-        Toolbar toolbar_list = (Toolbar)findViewById(R.id.toolbar_list);
+        Toolbar toolbar_list = findViewById(R.id.toolbar_list);
         setSupportActionBar(toolbar_list);
         if (getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);

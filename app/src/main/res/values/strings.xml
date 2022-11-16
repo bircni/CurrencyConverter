@@ -17,4 +17,11 @@
     <string name="reset">Reset</string>
     <string name="current_rate">Current rate: %s</string>
     <string name="refresh">Refresh</string>
+    <string name="about">About</string>
+    <string name="about_text">Currency Converter is a simple app that converts currencies.</string>
+    <string name="currency_change">Currency rate for %s changed</string>
+    <string name="currency_reset">Resetted all currency rates</string>
+    <string name="currency_update">Updated currency rates</string>
+    <string name="no_internet">No internet connection</string>
+    <string name="version">Version: %s</string>
 </resources>

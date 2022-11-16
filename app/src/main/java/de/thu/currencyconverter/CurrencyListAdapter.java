@@ -64,9 +64,9 @@ public class CurrencyListAdapter extends BaseAdapter {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.cc_list_view_item, null, false);
         }
-        TextView currency_text = (TextView) view.findViewById(R.id.Currency_text);
+        TextView currency_text = view.findViewById(R.id.Currency_text);
         currency_text.setText(rate.getCurrencyName());
-        ImageView flag1 = (ImageView) view.findViewById(R.id.flag1);
+        ImageView flag1 = view.findViewById(R.id.flag1);
         @SuppressLint("DiscouragedApi") int imageId = context.getResources().getIdentifier(getFlagId(rate),
                 "drawable", context.getPackageName());
         flag1.setImageResource(imageId);
