@@ -21,8 +21,8 @@
 ## Screenshots
 
 <div>
-<img src=".github/RM-graphics/converter-bright.png" alt="drawing" width="400"/>
-<img src=".github/RM-graphics/converter-dark.png" alt="drawing" width="400"/>
+<img src=".github/RM-graphics/converter-bright.png" alt="drawing" width="300"/>
+<img src=".github/RM-graphics/converter-dark.png" alt="drawing" width="300"/>
 </div>
 <!--![bright](.github/RM-graphics/converter-bright.png)![dark](.github/RM-graphics/converter-dark.png) -->
 <!-- ![bright](.github/RM-graphics/converter-bright-ls.jpg)![dark](.github/RM-graphics/converter-dark-ls.jpg)-->
