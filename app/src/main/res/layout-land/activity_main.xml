@@ -6,19 +6,30 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/Theme.currencyconverter.toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Spinner
         android:id="@+id/from_value"
         android:layout_width="200dp"
-        android:layout_height="40dp"
+        android:layout_height="60dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintStart_toEndOf="@+id/from_value_tv"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <Spinner
         android:id="@+id/to_value"
         android:layout_width="200dp"
-        android:layout_height="40dp"
+        android:layout_height="60dp"
         android:layout_marginTop="32dp"
         app:layout_constraintStart_toStartOf="@+id/from_value"
         app:layout_constraintTop_toBottomOf="@+id/from_value" />
@@ -27,18 +38,18 @@
         android:id="@+id/from_value_tv"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="40dp"
         android:text="@string/from_value_in"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <TextView
         android:id="@+id/to_value_tv"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="76dp"
         android:text="@string/to_value_in"
         app:layout_constraintEnd_toEndOf="@+id/from_value_tv"
         app:layout_constraintHorizontal_bias="0.0"
@@ -48,34 +59,33 @@
     <EditText
         android:id="@+id/number_input"
         android:layout_width="290dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="28dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="16dp"
+        android:autofillHints="@string/input_value"
         android:ems="10"
         android:hint="@string/input_value"
         android:inputType="numberDecimal"
         android:textAlignment="textEnd"
         app:layout_constraintStart_toEndOf="@+id/from_value"
-        app:layout_constraintTop_toTopOf="parent"
-        android:autofillHints="@string/input_value" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <Button
         android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_marginStart="20dp"
+        android:layout_width="140dp"
+        android:layout_height="60dp"
         android:layout_marginTop="32dp"
         android:onClick="onConvertClick"
         android:text="@string/calculate"
-        app:layout_constraintStart_toEndOf="@+id/to_value"
+        app:layout_constraintStart_toStartOf="@+id/number_input"
         app:layout_constraintTop_toBottomOf="@+id/number_input" />
 
     <TextView
         android:id="@+id/Converted"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="40dp"
         android:allowUndo="false"
         android:clickable="false"
         android:maxWidth="210dp"
