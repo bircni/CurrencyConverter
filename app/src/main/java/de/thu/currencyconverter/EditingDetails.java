@@ -37,7 +37,7 @@ public class EditingDetails extends AppCompatActivity {
         } else {
             actionBar = getString(R.string.edit_currency);
         }
-        TextView textView = (TextView) findViewById(R.id.edit_details);
+        TextView textView = findViewById(R.id.edit_details);
         textView.setOnEditorActionListener((textView1, i, keyEvent) -> {
             if (i == EditorInfo.IME_ACTION_DONE) {
                 Intent returnIntent = new Intent();
@@ -49,7 +49,7 @@ public class EditingDetails extends AppCompatActivity {
             }
             return false;
         });
-        Toolbar toolbar_list = (Toolbar) findViewById(R.id.toolbar_list);
+        Toolbar toolbar_list = findViewById(R.id.toolbar_list);
         setSupportActionBar(toolbar_list);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(actionBar);

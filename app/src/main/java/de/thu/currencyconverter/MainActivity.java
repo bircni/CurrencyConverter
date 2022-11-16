@@ -17,7 +17,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.widget.ShareActionProvider;
@@ -129,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
                 updateCurrencies();
                 return true;
                 case R.id.about_menu:
-                    startActivity(new Intent(getApplicationContext(), About.class));
+                    startActivity(new Intent(getApplicationContext(), AboutActivity.class));
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -213,24 +212,5 @@ public class MainActivity extends AppCompatActivity {
             String share = String.format(getString(R.string.share_text),amountF,from,to,resultF);
             setShareText(share);
         }
-    }
-
-    public void onResetClick(View view) {
-        Paper.book().write("Database", new ExchangeRateDatabase().getExchangeRates());
-        Toast.makeText(this,getString(R.string.currency_reset), Toast.LENGTH_SHORT).show();
-    }
-
-    /**
-     * Displays an Alert on the phone screen
-     *
-     * @param message the message to be displayed
-     */
-    private void displayAlert(String message) {
-        AlertDialog.Builder alert = new AlertDialog.Builder(this);
-        alert.setMessage(message);
-        alert.setCancelable(true);
-        alert.setPositiveButton("Ok", (dialog, id) -> dialog.cancel());
-        AlertDialog dialog = alert.create();
-        dialog.show();
     }
 }

@@ -2,19 +2,13 @@ package de.thu.currencyconverter;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import io.paperdb.Paper;
 
-
-public class About extends AppCompatActivity {
+public class AboutActivity extends AppCompatActivity {
 
     String versionName = BuildConfig.VERSION_NAME;
     String actionBar = "About";
@@ -27,7 +21,7 @@ public class About extends AppCompatActivity {
         VN.setText(String.format(getString(R.string.version), versionName));
         TextView aboutText = findViewById(R.id.aboutText);
         aboutText.setText(getString(R.string.about_text));
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_about);
+        Toolbar toolbar = findViewById(R.id.toolbar_about);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(actionBar);

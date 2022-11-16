@@ -24,7 +24,7 @@
         android:theme="@style/Theme.currencyconverter"
         tools:targetApi="33">
         <activity
-            android:name=".About"
+            android:name=".AboutActivity"
             android:exported="false" />
         <activity
             android:name=".EditingDetails"
