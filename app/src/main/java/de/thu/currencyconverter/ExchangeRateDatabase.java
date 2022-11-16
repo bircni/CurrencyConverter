@@ -61,6 +61,10 @@ public class ExchangeRateDatabase {
         Arrays.sort(CURRENCIES_LIST);
 
     }
+
+    /**
+     * initialize the Paper database
+     */
     public static void initDB() {
         if (!Paper.book().contains("Database")) {
             Paper.book().write("Database", RATES);
@@ -81,6 +85,12 @@ public class ExchangeRateDatabase {
         return 0;
     }
 
+    /**
+     * Sets exchange rate for currency (equivalent for one Euro) in PaperDB
+     *
+     * @param currency currency name
+     * @param rate exchange rate
+     */
     public static void setRates(String currency, String rate) {
         double rateD = Double.parseDouble(rate);
         if (!Paper.book().contains("Database")) {
@@ -112,10 +122,21 @@ public class ExchangeRateDatabase {
         return value / getExchangeRate(from) * getExchangeRate(to);
     }
 
+    /**
+     * gets the capital for the currency from the currency list
+     *
+     * @param currency currency name
+     * @return capital of the currency
+     */
     public String getCapital(String currency) {
         return Objects.requireNonNull(CURRENCIES_MAP.get(currency)).getCapital();
     }
 
+    /**
+     * gets the currency list
+     *
+     * @return currency list
+     */
     public ExchangeRate[] getExchangeRates() {
         return RATES;
     }

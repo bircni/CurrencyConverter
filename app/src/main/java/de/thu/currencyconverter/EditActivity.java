@@ -19,6 +19,11 @@ public class EditActivity extends AppCompatActivity {
     ExchangeRate[] exchangeRates;
     ActivityResultLauncher<Intent> activityResultLauncher;
 
+    /**
+     * This method is called when the activity is created.
+     *
+     * @param savedInstanceState The saved instance state.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +33,6 @@ public class EditActivity extends AppCompatActivity {
         CurrencyEditAdapter adapter = new CurrencyEditAdapter(Arrays.asList(exchangeRates));
         ListView listView = findViewById(R.id.CurrencyListEdit);
         listView.setAdapter(adapter);
-
         activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
             if (result.getResultCode() == RESULT_OK) {
                 Intent data = result.getData();
@@ -43,10 +47,8 @@ public class EditActivity extends AppCompatActivity {
                 Toast.makeText(this,String.format(getString(R.string.currency_change),currency), Toast.LENGTH_SHORT).show();
                 Paper.book().write("Database", r);
                 adapter1.notifyDataSetChanged();
-
             }
         });
-
         listView.setOnItemClickListener((parent, view, position, id) -> {
             Intent i = new Intent(this, EditingDetails.class);
             i.putExtra("currencyName", exchangeRates[position].getCurrencyName());
@@ -63,6 +65,11 @@ public class EditActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * This method is called when the back button is pressed.
+     *
+     * @return True if the back button is pressed.
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {

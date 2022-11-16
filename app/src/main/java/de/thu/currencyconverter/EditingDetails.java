@@ -17,6 +17,11 @@ public class EditingDetails extends AppCompatActivity {
     String actionBar;
     int position;
 
+    /**
+     * This method is called when the activity is created.
+     *
+     * @param savedInstanceState The saved instance state.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +64,11 @@ public class EditingDetails extends AppCompatActivity {
 
     }
 
+    /**
+     * This method is called when the user presses the back button.
+     *
+     * @return True if the back button was pressed.
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {

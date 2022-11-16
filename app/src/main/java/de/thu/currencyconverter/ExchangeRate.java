@@ -11,14 +11,23 @@ public class ExchangeRate {
         this.capital = capital;
     }
 
+    /**
+     * @return the currencyName
+     */
     public String getCurrencyName() {
         return currencyName;
     }
 
+    /**
+     * @return the capital
+     */
     public String getCapital() {
         return capital;
     }
 
+    /**
+     * @return the rateForOneEuro
+     */
     public double getRateForOneEuro() {
         return rateForOneEuro;
     }

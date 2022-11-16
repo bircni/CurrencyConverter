@@ -15,6 +15,11 @@ public class CurrencyListActivity extends AppCompatActivity {
     ExchangeRate[] exchangeRates2 = new ExchangeRateDatabase().getExchangeRates();
     ExchangeRateDatabase db = new ExchangeRateDatabase();
 
+    /**
+     * This method is called when the activity is created.
+     *
+     * @param savedInstanceState The saved instance state.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +41,11 @@ public class CurrencyListActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * This method is called when the back button is pressed.
+     *
+     * @return True if the back button is pressed.
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {

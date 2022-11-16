@@ -13,6 +13,11 @@ public class AboutActivity extends AppCompatActivity {
     String versionName = BuildConfig.VERSION_NAME;
     String actionBar = "About";
 
+    /**
+     * This method is called when the activity is created.
+     *
+     * @param savedInstanceState The saved instance state.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +35,11 @@ public class AboutActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * This method is called when the user clicks the back button.
+     *
+     * @return True if the event was handled, false otherwise.
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {

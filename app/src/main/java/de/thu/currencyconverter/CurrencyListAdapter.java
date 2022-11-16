@@ -19,22 +19,41 @@ public class CurrencyListAdapter extends BaseAdapter {
         this.rate_data = rate_data;
     }
 
+    /**
+     * This method returns the number of items in the list.
+     *
+     * @return The number of items in the list.
+     */
     @Override
     public int getCount() {
         return rate_data.size();
     }
 
+    /**
+     * This method returns the item at the given position.
+     *
+     * @param i The position of the item.
+     * @return The item at the given position.
+     */
     @Override
     public Object getItem(int i) {
         return rate_data.get(i);
     }
 
+    /**
+     * This method returns the item id at the given position.
+     *
+     * @param i The position of the item.
+     * @return i.
+     */
     @Override
     public long getItemId(int i) {
         return i;
     }
 
     /**
+     * This method returns the flagID of the given currency rate.
+     *
      * @return the flagId
      */
     private String getFlagId(ExchangeRate rate) {

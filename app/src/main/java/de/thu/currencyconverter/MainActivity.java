@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     ExchangeRate[] exchangeRates; // = new ExchangeRateDatabase().getExchangeRates();
     CurrencyListAdapter adapter; // = new CurrencyListAdapter(Arrays.asList(exchangeRates2));
     ShareActionProvider shareActionProvider;
+
     /**
      * Checks if the input is a number > 0
      *
@@ -83,22 +84,33 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
+
+    /**
+     *
+     * @param menu The options menu in which you place your items.
+     *
+     * @return You must return true for the menu to be displayed; if you return false it will not be shown.
+     */
     //TODO: RestrictedApi solve
     @SuppressLint("RestrictedApi")
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.settings_menu, menu);
         if(menu instanceof MenuBuilder) {  //To display icon on overflow menu
-
             MenuBuilder m = (MenuBuilder) menu;
             m.setOptionalIconsVisible(true);
-
         }
         MenuItem shareItem = menu.findItem(R.id.action_share);
         shareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
         setShareText(null);
         return true;
     }
+
+    /**
+     * This method sets the text to be shared.
+     *
+     * @param text The text to share
+     */
     private void setShareText(String text) {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("text/plain");
@@ -108,6 +120,11 @@ public class MainActivity extends AppCompatActivity {
         shareActionProvider.setShareIntent(shareIntent);
     }
 
+    /**
+     * This method is called when the user clicks on a menu item.
+     *
+     * @param item The menu item that was clicked
+     */
     @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -134,6 +151,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * This method fetches the exchange rates from the internet.
+     */
     private void updateCurrencies() {
         Thread thread = new Thread(() -> {
             try {
@@ -172,6 +192,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * This method checks if the device has an internet connection.
+     *
+     * @param context The context of the application
+     * @return true if the device has an internet connection, false otherwise
+     */
     public static boolean hasInternetConnection(final Context context) {
         final ConnectivityManager connectivityManager = (ConnectivityManager)context.
                 getSystemService(Context.CONNECTIVITY_SERVICE);
