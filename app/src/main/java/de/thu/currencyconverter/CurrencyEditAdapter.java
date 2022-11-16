@@ -1,6 +1,5 @@
 package de.thu.currencyconverter;
 
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,9 +11,17 @@ import android.widget.TextView;
 
 import java.util.List;
 
+/**
+ * This class is used to create a list of currencies to edit.
+ */
 public class CurrencyEditAdapter extends BaseAdapter {
     private final List<ExchangeRate> rate_data;
 
+    /**
+     * Constructor for the CurrencyEditAdapter.
+     *
+     * @param rate_data The list of currencies to edit.
+     */
     public CurrencyEditAdapter(List<ExchangeRate> rate_data) {
         this.rate_data = rate_data;
     }

@@ -9,6 +9,9 @@ import java.util.Objects;
 
 import io.paperdb.Paper;
 
+/**
+ * This class is used to store the exchange rates in a database.
+ */
 public class ExchangeRateDatabase {
     // Exchange rates to EURO - price for 1 Euro
     private static final ExchangeRate[] RATES = {
@@ -73,6 +76,9 @@ public class ExchangeRateDatabase {
 
     /**
      * Gets exchange rate for currency (equivalent for one Euro) from PaperDB
+     *
+     * @param currency the currency name
+     * @return the exchange rate
      */
     public static double getExchangeRate(String currency) {
         ExchangeRate[] rates = Paper.book().read("Database");
@@ -110,6 +116,9 @@ public class ExchangeRateDatabase {
     /**
      * Converts a value from a currency to another by accessing the Paper.db
      *
+     * @param currencyFrom the currency to convert from
+     * @param currencyTo the currency to convert to
+     * @param value the value to convert
      * @return converted value
      */
     public static double convertPaper(double value, int currencyFrom, int currencyTo) {

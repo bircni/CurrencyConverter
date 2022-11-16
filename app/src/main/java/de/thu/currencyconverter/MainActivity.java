@@ -37,8 +37,8 @@ import io.paperdb.Paper;
  */
 public class MainActivity extends AppCompatActivity {
 
-    ExchangeRate[] exchangeRates; // = new ExchangeRateDatabase().getExchangeRates();
-    CurrencyListAdapter adapter; // = new CurrencyListAdapter(Arrays.asList(exchangeRates2));
+    ExchangeRate[] exchangeRates;
+    CurrencyListAdapter adapter;
     ShareActionProvider shareActionProvider;
 
     /**

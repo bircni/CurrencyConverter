@@ -12,9 +12,17 @@ import android.widget.TextView;
 
 import java.util.List;
 
+/**
+ * Adapter for the list of currencies.
+ */
 public class CurrencyListAdapter extends BaseAdapter {
     private final List<ExchangeRate> rate_data;
 
+    /**
+     * Constructor for the CurrencyListAdapter.
+     *
+     * @param rate_data The list of currencies.
+     */
     public CurrencyListAdapter(List<ExchangeRate> rate_data) {
         this.rate_data = rate_data;
     }

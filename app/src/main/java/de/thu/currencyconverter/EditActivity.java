@@ -15,6 +15,9 @@ import java.util.Arrays;
 
 import io.paperdb.Paper;
 
+/**
+ * This activity is used to select a currency rate to edit.
+ */
 public class EditActivity extends AppCompatActivity {
     ExchangeRate[] exchangeRates;
     ActivityResultLauncher<Intent> activityResultLauncher;

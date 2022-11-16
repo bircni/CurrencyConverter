@@ -7,7 +7,9 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-
+/**
+ * This activity is show the about information.
+ */
 public class AboutActivity extends AppCompatActivity {
 
     String versionName = BuildConfig.VERSION_NAME;

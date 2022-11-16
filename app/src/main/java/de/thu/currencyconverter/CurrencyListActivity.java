@@ -11,6 +11,9 @@ import androidx.appcompat.widget.Toolbar;
 
 import java.util.Arrays;
 
+/**
+ * This activity is show the list of currencies.
+ */
 public class CurrencyListActivity extends AppCompatActivity {
     ExchangeRate[] exchangeRates2 = new ExchangeRateDatabase().getExchangeRates();
     ExchangeRateDatabase db = new ExchangeRateDatabase();

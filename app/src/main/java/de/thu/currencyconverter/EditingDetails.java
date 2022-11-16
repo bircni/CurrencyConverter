@@ -11,6 +11,9 @@ import androidx.appcompat.widget.Toolbar;
 
 import io.paperdb.Paper;
 
+/**
+ * This activity is used to edit the currency rate of a currency.
+ */
 public class EditingDetails extends AppCompatActivity {
 
     String currencyName = null;
