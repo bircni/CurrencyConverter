@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -38,6 +39,8 @@ public class EditActivity extends AppCompatActivity {
                 ExchangeRate[] r = Paper.book().read("Database");
                 assert r != null;
                 r[position].rateForOneEuro = Double.parseDouble(newRate);
+                String currency = r[position].getCurrencyName();
+                Toast.makeText(this,String.format(getString(R.string.currency_change),currency), Toast.LENGTH_SHORT).show();
                 Paper.book().write("Database", r);
                 adapter1.notifyDataSetChanged();
 

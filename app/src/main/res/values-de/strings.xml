@@ -18,4 +18,10 @@
     <string name="current_rate">Aktuelle Rate: %s</string>
     <string name="refresh">Aktualisieren</string>
     <string name="about">Über</string>
+    <string name="about_text">Currency Converter ist eine einfache App, die Währungen umrechnet</string>
+    <string name="currency_change">Umrechnungsrate für %s geändert</string>
+    <string name="currency_reset">Alle Umrechnungsraten zurückgesetzt</string>
+    <string name="currency_update">Umrechnungsraten aktualisiert</string>
+    <string name="no_internet">Keine Internetverbindung</string>
+    <string name="version">Version: %s</string>
 </resources>

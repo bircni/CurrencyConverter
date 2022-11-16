@@ -1,7 +1,11 @@
 package de.thu.currencyconverter;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -10,6 +14,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -118,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.reset_menu:
                 Paper.book().write("Database", new ExchangeRateDatabase().getExchangeRates());
+                Toast.makeText(this,getString(R.string.currency_reset), Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.refresh_menu:
                 updateCurrencies();
@@ -159,8 +165,24 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         });
-        thread.start();
+        if(hasInternetConnection(this)) {
+            Toast.makeText(this, getString(R.string.currency_update), Toast.LENGTH_SHORT).show();
+            thread.start();
+        } else {
+            Toast.makeText(this, getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
+        }
+    }
 
+    public static boolean hasInternetConnection(final Context context) {
+        final ConnectivityManager connectivityManager = (ConnectivityManager)context.
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        final Network network = connectivityManager.getActiveNetwork();
+        final NetworkCapabilities capabilities = connectivityManager
+                .getNetworkCapabilities(network);
+
+        return capabilities != null
+                && capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED);
     }
 
     /**
@@ -179,7 +201,8 @@ public class MainActivity extends AppCompatActivity {
         String to = exchangeRates[to_value.getSelectedItemPosition()].getCurrencyName();
         EditText number = findViewById(R.id.number_input);
         if (!checkInput(number.getText().toString())) {
-            displayAlert(getString(R.string.no_number));
+            Toast.makeText(this, getString(R.string.no_number), Toast.LENGTH_LONG).show();
+            //displayAlert(getString(R.string.no_number));
         } else {
             double amount = number.getText().toString().isEmpty() ? 0 : Double.parseDouble(number.getText().toString());
             double result = ExchangeRateDatabase.convertPaper(amount, fromInt, toInt);
@@ -190,6 +213,11 @@ public class MainActivity extends AppCompatActivity {
             String share = String.format(getString(R.string.share_text),amountF,from,to,resultF);
             setShareText(share);
         }
+    }
+
+    public void onResetClick(View view) {
+        Paper.book().write("Database", new ExchangeRateDatabase().getExchangeRates());
+        Toast.makeText(this,getString(R.string.currency_reset), Toast.LENGTH_SHORT).show();
     }
 
     /**
