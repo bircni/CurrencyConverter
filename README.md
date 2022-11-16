@@ -1,5 +1,7 @@
+<!--
 ![Android Studio](https://img.shields.io/badge/Android%20Studio-3DDC84.svg?logo=android-studio&logoColor=white)
-![Java](https://img.shields.io/badge/java-%23ED8B00.svg?logo=java&logoColor=white)  
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?logo=java&logoColor=white)
+ -->
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]  
