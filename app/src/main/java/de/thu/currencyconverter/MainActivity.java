@@ -74,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
         ExchangeRateDatabase.initDB();
         exchangeRates = Paper.book().read("Database");
         updateCurrencies();
-        //NEW
         assert exchangeRates != null;
         adapter = new CurrencyListAdapter(Arrays.asList(exchangeRates));
         Spinner from_value = findViewById(R.id.from_value);
@@ -86,24 +85,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * This method checks if the device has an internet connection.
      *
-     * @param menu The options menu in which you place your items.
-     *
-     * @return You must return true for the menu to be displayed; if you return false it will not be shown.
+     * @param context The context of the application
+     * @return true if the device has an internet connection, false otherwise
      */
-    //TODO: RestrictedApi solve
-    @SuppressLint("RestrictedApi")
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.settings_menu, menu);
-        if(menu instanceof MenuBuilder) {  //To display icon on overflow menu
-            MenuBuilder m = (MenuBuilder) menu;
-            m.setOptionalIconsVisible(true);
-        }
-        MenuItem shareItem = menu.findItem(R.id.action_share);
-        shareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
-        setShareText(null);
-        return true;
+    public static boolean hasInternetConnection(final Context context) {
+        final ConnectivityManager connectivityManager = (ConnectivityManager) context.
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+        final Network network = connectivityManager.getActiveNetwork();
+        final NetworkCapabilities capabilities = connectivityManager.getNetworkCapabilities(network);
+        return capabilities != null
+                && capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED);
     }
 
     /**
@@ -118,6 +111,25 @@ public class MainActivity extends AppCompatActivity {
             shareIntent.putExtra(Intent.EXTRA_TEXT, text);
         }
         shareActionProvider.setShareIntent(shareIntent);
+    }
+
+    /**
+     * @param menu The options menu in which you place your items.
+     * @return You must return true for the menu to be displayed; if you return false it will not be shown.
+     */
+    //TODO: RestrictedApi solve
+    @SuppressLint("RestrictedApi")
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.settings_menu, menu);
+        if (menu instanceof MenuBuilder) {
+            MenuBuilder m = (MenuBuilder) menu;
+            m.setOptionalIconsVisible(true);
+        }
+        MenuItem shareItem = menu.findItem(R.id.action_share);
+        shareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
+        setShareText(null);
+        return true;
     }
 
     /**
@@ -139,13 +151,13 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.reset_menu:
                 Paper.book().write("Database", new ExchangeRateDatabase().getExchangeRates());
-                Toast.makeText(this,getString(R.string.currency_reset), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.currency_reset), Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.refresh_menu:
                 updateCurrencies();
                 return true;
-                case R.id.about_menu:
-                    startActivity(new Intent(getApplicationContext(), AboutActivity.class));
+            case R.id.about_menu:
+                startActivity(new Intent(getApplicationContext(), AboutActivity.class));
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -184,30 +196,12 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         });
-        if(hasInternetConnection(this)) {
+        if (hasInternetConnection(this)) {
             Toast.makeText(this, getString(R.string.currency_update), Toast.LENGTH_SHORT).show();
             thread.start();
         } else {
             Toast.makeText(this, getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
         }
-    }
-
-    /**
-     * This method checks if the device has an internet connection.
-     *
-     * @param context The context of the application
-     * @return true if the device has an internet connection, false otherwise
-     */
-    public static boolean hasInternetConnection(final Context context) {
-        final ConnectivityManager connectivityManager = (ConnectivityManager)context.
-                getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        final Network network = connectivityManager.getActiveNetwork();
-        final NetworkCapabilities capabilities = connectivityManager
-                .getNetworkCapabilities(network);
-
-        return capabilities != null
-                && capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED);
     }
 
     /**
@@ -217,7 +211,6 @@ public class MainActivity extends AppCompatActivity {
      */
     public void onConvertClick(View view) {
         adapter.notifyDataSetChanged();
-        //ExchangeRate [] convRate = Paper.book().read("Database");
         Spinner from_value = findViewById(R.id.from_value);
         Spinner to_value = findViewById(R.id.to_value);
         String from = exchangeRates[from_value.getSelectedItemPosition()].getCurrencyName();
@@ -227,7 +220,6 @@ public class MainActivity extends AppCompatActivity {
         EditText number = findViewById(R.id.number_input);
         if (!checkInput(number.getText().toString())) {
             Toast.makeText(this, getString(R.string.no_number), Toast.LENGTH_LONG).show();
-            //displayAlert(getString(R.string.no_number));
         } else {
             double amount = number.getText().toString().isEmpty() ? 0 : Double.parseDouble(number.getText().toString());
             double result = ExchangeRateDatabase.convertPaper(amount, fromInt, toInt);
@@ -235,7 +227,7 @@ public class MainActivity extends AppCompatActivity {
             String resultF = String.format(getResources().getConfiguration().getLocales().get(0), "%1.2f", result);
             String amountF = String.format(getResources().getConfiguration().getLocales().get(0), "%1.2f", amount);
             result_value.setText(resultF);
-            String share = String.format(getString(R.string.share_text),amountF,from,to,resultF);
+            String share = String.format(getString(R.string.share_text), amountF, from, to, resultF);
             setShareText(share);
         }
     }
