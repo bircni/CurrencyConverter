@@ -12,7 +12,7 @@ import androidx.appcompat.widget.Toolbar;
  */
 public class AboutActivity extends AppCompatActivity {
 
-    String versionName = BuildConfig.VERSION_NAME;
+    String versionName = "0.5";
     String actionBar = "About";
 
     /**
