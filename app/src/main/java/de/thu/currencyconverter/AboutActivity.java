@@ -12,7 +12,7 @@ import androidx.appcompat.widget.Toolbar;
  */
 public class AboutActivity extends AppCompatActivity {
 
-    String versionName = BuildConfig.VERSION_NAME;
+
     String actionBar = "About";
 
     /**
@@ -25,7 +25,7 @@ public class AboutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_page);
         TextView VN = findViewById(R.id.versionName);
-        VN.setText(String.format(getString(R.string.version), versionName));
+        VN.setText(String.format(getString(R.string.version), "0.5"));
         TextView aboutText = findViewById(R.id.aboutText);
         aboutText.setText(getString(R.string.about_text));
         Toolbar toolbar = findViewById(R.id.toolbar_about);
