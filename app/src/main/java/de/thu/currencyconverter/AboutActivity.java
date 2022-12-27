@@ -1,7 +1,10 @@
 package de.thu.currencyconverter;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,6 +31,12 @@ public class AboutActivity extends AppCompatActivity {
         VN.setText(String.format(getString(R.string.version), versionName));
         TextView aboutText = findViewById(R.id.aboutText);
         aboutText.setText(getString(R.string.about_text));
+        String website = "https://www.thu.de";
+        ImageButton socialsB = findViewById(R.id.socials_button);
+        socialsB.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(website));
+            startActivity(intent);
+        });
         Toolbar toolbar = findViewById(R.id.toolbar_about);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
