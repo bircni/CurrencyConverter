@@ -34,8 +34,8 @@ public class EditingDetails extends AppCompatActivity {
         TextView currRate = findViewById(R.id.currentRate);
         ExchangeRate[] exchangeRates = Paper.book().read("Database");
         if (b != null) {
-            currencyName = (String) b.get("currencyName");
-            position = (int) b.get("position");
+            currencyName = b.getString("currencyName");
+            position = b.getInt("position");
         }
         assert exchangeRates != null;
         String rate = String.format(getResources().getConfiguration().getLocales().get(0), "%1.2f", exchangeRates[position].rateForOneEuro);
