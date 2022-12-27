@@ -34,3 +34,4 @@ google-services.json
 
 # Mac
 .DS_Store
+app/release/output-metadata.json
