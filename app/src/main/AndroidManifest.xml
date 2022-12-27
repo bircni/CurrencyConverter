@@ -17,9 +17,9 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/currencyconverter_round"
+        android:icon="@mipmap/currencyconverter"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/currencyconverter"
+        android:roundIcon="@mipmap/currencyconverter_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.currencyconverter"
         tools:targetApi="33">
