@@ -32,23 +32,21 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="32dp"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/versionName" />
-<!--
+
     <ImageButton
-        android:id="@+id/reset_button"
+        android:id="@+id/socials_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="340dp"
-        android:onClick="onResetClick"
-        android:src="@drawable/reset_icon"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/github"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_about"
-        android:contentDescription="TODO" />
-        -->
+        android:src="@drawable/github"
+        app:layout_constraintTop_toBottomOf="@+id/aboutText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
