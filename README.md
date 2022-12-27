@@ -15,9 +15,17 @@
 ## Screenshots
 
 <div align="center">
-<img src=".github/RM-graphics/converter-bright.png" width="300"  />
-<img src=".github/RM-graphics/converter-dark.png" width="300"/>
+<img src="./docs/assets/graphics/converter-bright.png" width="300"  />
+<img style="margin-left: 100px" src="./docs/assets/graphics/converter-dark.png" width="300"/>
 </div>
+<details>
+<summary>Landscape</summary>
+</br>
+<div align="center">
+<img src="./docs/assets/graphics/converter-bright-ls.png" width="600"  />
+<img src="./docs/assets/graphics/converter-dark-ls.png" width="600"/>
+</div>
+</details>
 
 ### Prerequisites
 
@@ -36,7 +44,6 @@
 2. Open in Android Studio
 3. Run on emulator or device
 
-<!-- CONTRIBUTING -->
 ## Contributing
 
 If you want to contribute - open an issue or a pull request.
@@ -47,3 +54,6 @@ If you want to contribute - open an issue or a pull request.
 4. Push to the Branch (`git push origin feature/CurrencyCool`)
 5. Open a Pull Request
 
+## Thanks to
+
+<a href="https://iconscout.com/icons/github-brand-logo" target="_blank">Github Logo Icon</a> by <a href="https://iconscout.com/contributors/adi-sinchetru" target="_blank">Adi Sînchetru</a>
