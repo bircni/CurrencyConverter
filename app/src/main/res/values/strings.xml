@@ -24,4 +24,5 @@
     <string name="currency_update">Updated currency rates</string>
     <string name="no_internet">No internet connection</string>
     <string name="version">Version: %s</string>
+    <string name="github">Github</string>
 </resources>

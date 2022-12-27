@@ -24,4 +24,5 @@
     <string name="currency_update">Umrechnungsraten aktualisiert</string>
     <string name="no_internet">Keine Internetverbindung</string>
     <string name="version">Version: %s</string>
+    <string name="github">Github</string>
 </resources>
