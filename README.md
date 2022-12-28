@@ -57,4 +57,3 @@ If you want to contribute - open an issue or a pull request.
 ## Thanks to
 
 <a href="https://iconscout.com/icons/github-brand-logo" target="_blank">Github Logo Icon</a> by <a href="https://iconscout.com/contributors/adi-sinchetru" target="_blank">Adi Sînchetru</a>  
-<a target="_blank" href="https://icons8.com/icon/21154/w%C3%A4hrungsumtausch">Währungsumtausch</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
