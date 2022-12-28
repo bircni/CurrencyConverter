@@ -7,7 +7,6 @@ import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,12 +21,10 @@ import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.widget.ShareActionProvider;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.MenuItemCompat;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
+import androidx.work.WorkRequest;
 
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserFactory;
-
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.Arrays;
 
 import io.paperdb.Paper;
@@ -73,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         Paper.init(this);
         ExchangeRateDatabase.initDB();
         exchangeRates = Paper.book().read("Database");
-        updateCurrencies();
+        silentUpdate();
         assert exchangeRates != null;
         adapter = new CurrencyListAdapter(Arrays.asList(exchangeRates));
         Spinner from_value = findViewById(R.id.from_value);
@@ -154,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, getString(R.string.currency_reset), Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.refresh_menu:
-                updateCurrencies();
+                silentUpdate();
                 return true;
             case R.id.about_menu:
                 startActivity(new Intent(getApplicationContext(), AboutActivity.class));
@@ -164,41 +161,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * This method fetches the exchange rates from the internet.
+     * updates the currencies in the background
      */
-    private void updateCurrencies() {
-        Thread thread = new Thread(() -> {
-            try {
-                String webString = "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml";
-                try {
-                    URL url = new URL(webString);
-                    URLConnection connection = url.openConnection();
-                    XmlPullParser parser = XmlPullParserFactory.newInstance().newPullParser();
-                    parser.setInput(connection.getInputStream(), connection.getContentEncoding());
-                    int eventType = parser.getEventType();
-                    while (eventType != XmlPullParser.END_DOCUMENT) {
-                        if (eventType == XmlPullParser.START_TAG) {
-                            if (parser.getName().equals("Cube")) {
-                                String currency = parser.getAttributeValue(null, "currency");
-                                String rate = parser.getAttributeValue(null, "rate");
-                                if (currency != null && rate != null) {
-                                    ExchangeRateDatabase.setRates(currency, rate);
-                                }
-                            }
-                        }
-                        eventType = parser.next();
-                    }
-                } catch (Exception e) {
-                    Log.e("ErrorURL", "Error with XML: " + e.getMessage());
-                    throw new RuntimeException(e);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
+    private void silentUpdate() {
         if (hasInternetConnection(this)) {
             Toast.makeText(this, getString(R.string.currency_update), Toast.LENGTH_SHORT).show();
-            thread.start();
+            WorkRequest countWorkRequest =
+                    new OneTimeWorkRequest.Builder(ExchangeRateUpdateWorker.class).build();
+            WorkManager.getInstance(this).enqueue(countWorkRequest);
         } else {
             Toast.makeText(this, getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
         }
