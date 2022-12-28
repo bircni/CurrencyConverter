@@ -1,7 +1,5 @@
 package de.thu.currencyconverter;
 
-import android.util.Log;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -49,7 +47,6 @@ public class ExchangeRateDatabase {
             new ExchangeRate("ZAR", "Cape Town", 13.1446)
     };
 
-
     private final static Map<String, ExchangeRate> CURRENCIES_MAP = new HashMap<>();
 
     private final static String[] CURRENCIES_LIST;
@@ -59,7 +56,6 @@ public class ExchangeRateDatabase {
             CURRENCIES_MAP.put(r.getCurrencyName(), r);
         }
         CURRENCIES_LIST = new String[CURRENCIES_MAP.size()];
-
         CURRENCIES_MAP.keySet().toArray(CURRENCIES_LIST);
         Arrays.sort(CURRENCIES_LIST);
 
@@ -95,7 +91,7 @@ public class ExchangeRateDatabase {
      * Sets exchange rate for currency (equivalent for one Euro) in PaperDB
      *
      * @param currency currency name
-     * @param rate exchange rate
+     * @param rate     exchange rate
      */
     public static void setRates(String currency, String rate) {
         double rateD = Double.parseDouble(rate);
@@ -107,7 +103,6 @@ public class ExchangeRateDatabase {
         for (ExchangeRate r : rates) {
             if (r.getCurrencyName().equals(currency)) {
                 r.rateForOneEuro = rateD;
-                Log.d("Database", "setRates: " + rateD);
             }
         }
         Paper.book().write("Database", rates);
@@ -117,17 +112,15 @@ public class ExchangeRateDatabase {
      * Converts a value from a currency to another by accessing the Paper.db
      *
      * @param currencyFrom the currency to convert from
-     * @param currencyTo the currency to convert to
-     * @param value the value to convert
+     * @param currencyTo   the currency to convert to
+     * @param value        the value to convert
      * @return converted value
      */
     public static double convertPaper(double value, int currencyFrom, int currencyTo) {
         ExchangeRate[] er = Paper.book().read("Database");
         assert er != null;
         String from = er[currencyFrom].getCurrencyName();
-        Log.d("Convert:", from);
         String to = er[currencyTo].getCurrencyName();
-        Log.d("Convert", to);
         return value / getExchangeRate(from) * getExchangeRate(to);
     }
 
