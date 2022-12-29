@@ -22,9 +22,7 @@ public class ExchangeRateUpdateWorker extends Worker {
     @NonNull
     @Override
     public Result doWork() {
-        Log.d("ExchangeRateUpdateWorker", "Start counting");
         updateCurrencies();
-        Log.d("ExchangeRateUpdateWorker", "Finished counting");
         return Result.success();
     }
 
