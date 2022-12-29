@@ -21,12 +21,6 @@
         android:icon="@drawable/edit_icon"
         app:showAsAction="never|withText" />
     <item
-        android:id="@+id/reset_menu"
-        android:title="@string/reset"
-        android:visible="true"
-        android:icon="@drawable/reset_icon"
-        app:showAsAction="never|withText" />
-    <item
         android:id="@+id/about_menu"
         android:title="@string/about"
         android:visible="true"
@@ -39,4 +33,10 @@
         android:icon="@drawable/share_icon"
         app:showAsAction="never"
         app:actionProviderClass="androidx.appcompat.widget.ShareActionProvider" />
+    <item
+        android:id="@+id/reset_menu"
+        android:title="@string/reset"
+        android:visible="true"
+        android:icon="@drawable/reset_icon"
+        app:showAsAction="never|withText" />
 </menu>
