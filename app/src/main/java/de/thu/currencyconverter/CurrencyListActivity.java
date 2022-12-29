@@ -17,6 +17,7 @@ import java.util.Arrays;
 public class CurrencyListActivity extends AppCompatActivity {
     ExchangeRate[] exchangeRates2 = new ExchangeRateDatabase().getExchangeRates();
     ExchangeRateDatabase db = new ExchangeRateDatabase();
+    String actionBar = "Open in Maps";
 
     /**
      * This method is called when the activity is created.
@@ -39,6 +40,7 @@ public class CurrencyListActivity extends AppCompatActivity {
         Toolbar toolbar_list = findViewById(R.id.toolbar_list);
         setSupportActionBar(toolbar_list);
         if (getSupportActionBar() != null){
+            getSupportActionBar().setTitle(actionBar);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
