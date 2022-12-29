@@ -1,12 +1,14 @@
 package de.thu.currencyconverter;
 
 import android.annotation.SuppressLint;
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,11 +23,15 @@ import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.widget.ShareActionProvider;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.MenuItemCompat;
+import androidx.work.Constraints;
+import androidx.work.ExistingPeriodicWorkPolicy;
 import androidx.work.OneTimeWorkRequest;
+import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
 import androidx.work.WorkRequest;
 
 import java.util.Arrays;
+import java.util.concurrent.TimeUnit;
 
 import io.paperdb.Paper;
 
@@ -71,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
         ExchangeRateDatabase.initDB();
         exchangeRates = Paper.book().read("Database");
         silentUpdate();
+        scheduleUpdate();
         assert exchangeRates != null;
         adapter = new CurrencyListAdapter(Arrays.asList(exchangeRates));
         Spinner from_value = findViewById(R.id.from_value);
@@ -160,17 +167,43 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void scheduleUpdate() {
+        WorkManager workManager = WorkManager.getInstance(this);
+        Constraints constraints = new Constraints.Builder()
+                .setRequiresCharging(false)
+                .build();
+        PeriodicWorkRequest periodicCounterRequest =
+                new PeriodicWorkRequest.Builder(ExchangeRateUpdateWorker.class, 15, TimeUnit.MINUTES)
+                        .setConstraints(constraints)
+                        .addTag("periodicUpdateTag")
+                        .build();
+        workManager.enqueueUniquePeriodicWork("ExchangeRateUpdateWorker",
+                ExistingPeriodicWorkPolicy.KEEP,
+                periodicCounterRequest);
+        Log.d("MainActivity", "Scheduled update");
+    }
+
+
+    private boolean isForeground() {
+        ActivityManager.RunningAppProcessInfo appProcessInfo = new ActivityManager.RunningAppProcessInfo();
+        ActivityManager.getMyMemoryState(appProcessInfo);
+        return (appProcessInfo.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND ||
+                appProcessInfo.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_VISIBLE);
+    }
+
     /**
      * updates the currencies in the background
      */
     private void silentUpdate() {
         if (hasInternetConnection(this)) {
-            Toast.makeText(this, getString(R.string.currency_update), Toast.LENGTH_SHORT).show();
+            if (isForeground())
+                Toast.makeText(this, getString(R.string.currency_update), Toast.LENGTH_SHORT).show();
             WorkRequest countWorkRequest =
                     new OneTimeWorkRequest.Builder(ExchangeRateUpdateWorker.class).build();
             WorkManager.getInstance(this).enqueue(countWorkRequest);
         } else {
-            Toast.makeText(this, getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
+            if (isForeground())
+                Toast.makeText(this, getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
         }
     }
 
