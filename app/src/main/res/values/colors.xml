@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="yellow_dark">#cabc01</color>
-    <color name="green_var">#2EA198</color>
-    <color name="green">#007a70</color>
+    <color name="green_var">#597102</color>
+    <color name="green">#68782B</color>
     <color name="blue">#018fbf</color>
     <color name="dark_blue">#066D8F</color>
     <color name="black">#FF000000</color>
