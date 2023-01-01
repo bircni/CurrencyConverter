@@ -15,17 +15,9 @@
 ## Screenshots
 
 <div align="center">
-<img src="./docs/assets/graphics/converter-bright.png" width="300"  />
-<img style="margin-left: 100px" src="./docs/assets/graphics/converter-dark.png" width="300"/>
+<img src="./docs/assets/graphics/converter-dark.png" width="300"  />
+<img style="margin-left: 100px" src="./docs/assets/graphics/converter-bright.png" width="300"/>
 </div>
-<details>
-<summary>Landscape</summary>
-</br>
-<div align="center">
-<img src="./docs/assets/graphics/converter-bright-ls.png" width="600"  />
-<img src="./docs/assets/graphics/converter-dark-ls.png" width="600"/>
-</div>
-</details>
 
 ### Prerequisites
 
