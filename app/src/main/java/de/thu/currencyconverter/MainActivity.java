@@ -8,7 +8,6 @@ import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -173,14 +172,13 @@ public class MainActivity extends AppCompatActivity {
                 .setRequiresCharging(false)
                 .build();
         PeriodicWorkRequest periodicCounterRequest =
-                new PeriodicWorkRequest.Builder(ExchangeRateUpdateWorker.class, 15, TimeUnit.MINUTES)
+                new PeriodicWorkRequest.Builder(ExchangeRateUpdateWorker.class, 24, TimeUnit.HOURS)
                         .setConstraints(constraints)
                         .addTag("periodicUpdateTag")
                         .build();
         workManager.enqueueUniquePeriodicWork("ExchangeRateUpdateWorker",
                 ExistingPeriodicWorkPolicy.KEEP,
                 periodicCounterRequest);
-        Log.d("MainActivity", "Scheduled update");
     }
 
 
