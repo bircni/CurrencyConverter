@@ -24,6 +24,7 @@
         android:layout_height="60dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="50dp"
+        android:contentDescription="@string/from_value_in"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
@@ -33,9 +34,11 @@
         android:layout_height="60dp"
         android:layout_marginTop="108dp"
         android:layout_marginEnd="50dp"
+        android:contentDescription="@string/to_value_in"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/from_value"
-        app:layout_constraintTop_toBottomOf="@+id/from_value" />
+        app:layout_constraintTop_toBottomOf="@+id/from_value"
+        tools:ignore="DuplicateSpeakableTextCheck" />
 
     <TextView
         android:id="@+id/from_value_tv"
