@@ -2,9 +2,13 @@
 
 # CurrencyConverter
 
+<div align="center">
+<a href='https://github.com/bircni/CurrencyConverter/releases/latest'><img alt='Get it on Github' src='.\docs\assets\graphics\badge_github.png' height='80px'/></a>
+</div>
+
 ## About The Project
 
- A small Android App to convert currencies.
+A small Android App to convert currencies.
 
 - Supports multiple currencies and offline mode.
 - Uses [EuropeanCentralBank API](https://www.ecb.europa.eu) to fetch the latest exchange rates.
