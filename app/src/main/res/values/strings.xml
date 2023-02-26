@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">CurrencyConverter</string>
-    <string name="from_value_in">From value in</string>
-    <string name="to_value_in">To value in</string>
+    <string name="from_value_in">From</string>
+    <string name="to_value_in">To</string>
     <string name="calculate">Convert</string>
     <string name="zero">0.00</string>
     <string name="flag">Flag</string>
