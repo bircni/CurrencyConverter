@@ -45,6 +45,7 @@ public class EditActivity extends AppCompatActivity {
                 int position = data.getIntExtra("position", 0);
                 ExchangeRate[] r = Paper.book().read("Database");
                 assert r != null;
+                assert newRate != null;
                 r[position].rateForOneEuro = Double.parseDouble(newRate);
                 String currency = r[position].getCurrencyName();
                 Toast.makeText(this,String.format(getString(R.string.currency_change),currency), Toast.LENGTH_SHORT).show();

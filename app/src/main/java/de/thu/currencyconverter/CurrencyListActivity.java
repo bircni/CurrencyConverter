@@ -15,9 +15,9 @@ import java.util.Arrays;
  * This activity is show the list of currencies.
  */
 public class CurrencyListActivity extends AppCompatActivity {
-    ExchangeRate[] exchangeRates2 = new ExchangeRateDatabase().getExchangeRates();
-    ExchangeRateDatabase db = new ExchangeRateDatabase();
-    String actionBar = "Open in Maps";
+    final ExchangeRate[] exchangeRates2 = new ExchangeRateDatabase().getExchangeRates();
+    final ExchangeRateDatabase db = new ExchangeRateDatabase();
+    final String actionBar = "Open in Maps";
 
     /**
      * This method is called when the activity is created.
