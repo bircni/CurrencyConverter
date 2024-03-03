@@ -125,8 +125,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.settings_menu, menu);
-        if (menu instanceof MenuBuilder) {
-            MenuBuilder m = (MenuBuilder) menu;
+        if (menu instanceof MenuBuilder m) {
             m.setOptionalIconsVisible(true);
         }
         MenuItem shareItem = menu.findItem(R.id.action_share);
